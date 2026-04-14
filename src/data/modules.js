@@ -20,6 +20,10 @@ export const modules = [
     path: 'assets',
   },
   {
+    label: 'INSURANCE',
+    path: 'insurance',
+  },
+  {
     label: 'PROFILE',
     path: 'profile',
   },

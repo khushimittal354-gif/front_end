@@ -1,12 +1,13 @@
 import { NavLink, Navigate, Route, Routes } from 'react-router-dom'
 
-import AssetsPage from './pages/AssetsPage'
-import FinancePage from './pages/FinancePage'
-import HrPage from './pages/HrPage'
-import LoginPage from './pages/LoginPage'
-import ProfilePage from './pages/ProfilePage'
-import TimesheetPage from './pages/TimesheetPage'
-import TrainingPage from './pages/TrainingPage'
+import AssetsPage from './pages/assets/AssetsPage'
+import FinancePage from './pages/finance/FinancePage'
+import HrPage from './pages/hr/HrPage'
+import InsurancePage from './pages/insurance/InsurancePage'
+import LoginPage from './pages/login/LoginPage'
+import ProfilePage from './pages/profile/ProfilePage'
+import TimesheetPage from './pages/timesheet/TimesheetPage'
+import TrainingPage from './pages/training/TrainingPage'
 import { modules } from './data/modules'
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
           <Route path="training" element={<TrainingPage />} />
           <Route path="timesheet" element={<TimesheetPage />} />
           <Route path="assets" element={<AssetsPage />} />
+          <Route path="insurance" element={<InsurancePage />} />
           <Route path="profile" element={<ProfilePage />} />
           <Route path="login" element={<LoginPage />} />
           <Route path="*" element={<Navigate to="/hr" replace />} />
