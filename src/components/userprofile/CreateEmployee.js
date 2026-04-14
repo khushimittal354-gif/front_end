@@ -12,6 +12,7 @@ function CreateEmployee() {
     password: "",
     role: "EMPLOYEE",
     dateOfJoining: "",
+    designation: "" ,
     employmentType: "FULL_TIME",
   });
 
@@ -48,6 +49,7 @@ function CreateEmployee() {
           password: "",
           role: "EMPLOYEE",
           dateOfJoining: "",
+          designation: "",
           employmentType: "FULL_TIME",
         });
       })
@@ -218,7 +220,25 @@ function CreateEmployee() {
                   {createdEmployee.dateOfJoining}
                 </td>
               </tr>
-
+              
+                <tr style={{
+                borderBottom: "1px solid #c8e6c9"
+              }}>
+                <td style={{
+                  padding: "6px",
+                  fontWeight: "bold"
+                }}>
+                  Designation
+                </td>
+                <td style={{
+                  padding: "6px",
+                  color: "#1976d2",
+                  fontWeight: "bold"
+                }}>
+                  {createdEmployee.designation}
+                </td>
+              </tr>
+             
               <tr>
                 <td style={{
                   padding: "6px",
@@ -290,6 +310,16 @@ function CreateEmployee() {
         name="dateOfJoining"
         type="date"
         value={form.dateOfJoining}
+        onChange={handleChange}
+      />
+
+        {/* Designation */}
+      <label style={lbl}>designation *</label>
+      <input
+        style={inp}
+        name="designation"
+        placeholder="Enter designation"
+        value={form.designation}
         onChange={handleChange}
       />
 
