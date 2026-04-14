@@ -38,7 +38,7 @@ export const addEducation = (data) =>
     axiosInstance.post("/finsecure/employee/education", data);
 
 export const deleteEducation = (eduId) =>
-    axiosInstance.delete('/finsecure/employee/education/${eduId}');
+    axiosInstance.delete(`/finsecure/employee/education/${eduId}`);
 
 //========documents==========
 export const getMyDocuments = () =>
