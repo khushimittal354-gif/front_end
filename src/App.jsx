@@ -1,4 +1,5 @@
 import { Link, Navigate, Route, Routes } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast'
 
 import AssetsPage from './pages/assets/AssetsPage'
 import BankManagementPage from './pages/finance/BankManagementPage'
@@ -8,13 +9,19 @@ import HrPage from './pages/hr/HrPage'
 import InsurancePage from './pages/insurance/InsurancePage'
 import InvestmentManagementPage from './pages/finance/InvestmentManagementPage'
 import LoginPage from './pages/login/LoginPage'
+import MutualFundManagementPage from './pages/finance/MutualFundManagementPage'
 import ProfilePage from './pages/profile/ProfilePage'
 import ReportsPage from './pages/finance/ReportsPage'
 import SalaryProcessingPage from './pages/finance/SalaryProcessingPage'
+import EmployeeBankReviewPage from './pages/finance/EmployeeBankReviewPage'
+import EmployeeInvestmentReviewPage from './pages/finance/EmployeeInvestmentReviewPage'
 import TimesheetPage from './pages/timesheet/TimesheetPage'
 import TrainingPage from './pages/training/TrainingPage'
+import { ProtectedRoute, useAuth } from './Context/AuthContext'
 
 function App() {
+  const { isAuthenticated, user, logout } = useAuth()
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
       <header className="border-b border-slate-200 bg-white">
@@ -43,33 +50,155 @@ function App() {
             </Link>
           </nav>
 
-          <Link
-            to="/login"
-            className="rounded border border-slate-900 bg-slate-900 px-4 py-2 text-sm font-medium text-white"
-          >
-            Login
-          </Link>
+          {isAuthenticated ? (
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-slate-600">{user?.username || 'User'}</span>
+              <button
+                type="button"
+                onClick={logout}
+                className="rounded border border-slate-900 bg-slate-900 px-4 py-2 text-sm font-medium text-white"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <Link
+              to="/login"
+              className="rounded border border-slate-900 bg-slate-900 px-4 py-2 text-sm font-medium text-white"
+            >
+              Login
+            </Link>
+          )}
         </div>
       </header>
 
       <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
         <Routes>
-          <Route path="hr" element={<HrPage />} />
-          <Route path="finance" element={<FinancePage />} />
-          <Route path="finance/bank-management" element={<BankManagementPage />} />
-          <Route path="finance/investment-management" element={<InvestmentManagementPage />} />
-          <Route path="finance/card-management" element={<CardManagementPage />} />
-          <Route path="finance/salary-processing" element={<SalaryProcessingPage />} />
-          <Route path="finance/reports" element={<ReportsPage />} />
-          <Route path="training" element={<TrainingPage />} />
-          <Route path="timesheet" element={<TimesheetPage />} />
-          <Route path="assets" element={<AssetsPage />} />
-          <Route path="insurance" element={<InsurancePage />} />
-          <Route path="profile" element={<ProfilePage />} />
+          <Route
+            path="hr"
+            element={
+              <ProtectedRoute>
+                <HrPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="finance"
+            element={
+              <ProtectedRoute>
+                <FinancePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="finance/bank-management"
+            element={
+              <ProtectedRoute>
+                <BankManagementPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="finance/investment-management"
+            element={
+              <ProtectedRoute>
+                <InvestmentManagementPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="finance/mutual-fund-management"
+            element={
+              <ProtectedRoute>
+                <MutualFundManagementPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="finance/card-management"
+            element={
+              <ProtectedRoute>
+                <CardManagementPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="finance/salary-processing"
+            element={
+              <ProtectedRoute>
+                <SalaryProcessingPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="finance/reports"
+            element={
+              <ProtectedRoute>
+                <ReportsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="finance/employee-bank-review"
+            element={
+              <ProtectedRoute>
+                <EmployeeBankReviewPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="finance/employee-investment-review"
+            element={
+              <ProtectedRoute>
+                <EmployeeInvestmentReviewPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="training"
+            element={
+              <ProtectedRoute>
+                <TrainingPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="timesheet"
+            element={
+              <ProtectedRoute>
+                <TimesheetPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="assets"
+            element={
+              <ProtectedRoute>
+                <AssetsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="insurance"
+            element={
+              <ProtectedRoute>
+                <InsurancePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="profile"
+            element={
+              <ProtectedRoute>
+                <ProfilePage />
+              </ProtectedRoute>
+            }
+          />
           <Route path="login" element={<LoginPage />} />
-          <Route path="*" element={<Navigate to="/hr" replace />} />
+          <Route path="*" element={<Navigate to={isAuthenticated ? '/hr' : '/login'} replace />} />
         </Routes>
       </main>
+      <Toaster position="top-right" reverseOrder={false} />
     </div>
   )
 }

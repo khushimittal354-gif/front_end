@@ -56,7 +56,7 @@ export default function CardManagementPage() {
     }
 
     if (!addForm.expiryDate.trim()) {
-      const msg = 'Please enter expiry date (YYYY-MM format).'
+      const msg = 'Please enter expiry date (MM-yyyy format).'
       console.warn('[CardManagementPage]', msg)
       toast.error(msg)
       return
@@ -225,7 +225,7 @@ export default function CardManagementPage() {
                       expiryDate: event.target.value,
                     }))
                   }
-                  placeholder="YYYY-MM (e.g., 2025-12)"
+                  placeholder="MM-yyyy (e.g., 12-2025)"
                   className="w-full rounded-md border border-slate-300 px-3 py-2 outline-none"
                 />
               </div>

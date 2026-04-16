@@ -14,3 +14,33 @@ The React Compiler is not enabled on this template because of its impact on dev 
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+## Backend API integration (Eclipse)
+
+The project now includes a reusable service layer:
+
+- `src/services/financeService.js`: direct `axios` API methods (`getFinanceOverview`, cards, investments, bank APIs).
+- `src/services/index.js`: barrel export for all services.
+
+### Configure backend URL
+
+1. Create a `.env` file in project root (or copy `.env.example`).
+2. Set:
+
+```env
+VITE_API_BASE_URL=http://localhost:8080
+```
+
+This should match the backend API host where your Eclipse server is running.
+
+### How to use in pages/components
+
+Example:
+
+```js
+import { getFinanceOverview } from '../services/financeService'
+
+const data = await getFinanceOverview()
+```
+
+`FinancePage` is already connected to this service and renders dynamic overview data.
